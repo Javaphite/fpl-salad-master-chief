@@ -1,6 +1,5 @@
 package ua.training.fpl.model.products;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -10,17 +9,22 @@ abstract class Product {
 
     protected String name;
     protected long calorificValue;
-    protected LocalDate expirationDate;
     boolean isVegan;
     Set<PreparationMethod> preparationSteps;
 
-    // TODO: complete list of methods
     protected enum PreparationMethod {
         FRIED,
+        BOILED,
+        STEWED,
+        WARM,
+        COLD,
+        SMASHED,
         CIRCLE_SLICED,
         CUBES_SLICED,
-        WHOLE,
-        BOILED;
+        MINCE,
+        FERMENTED,
+        CARAMELIZED,
+        NONE;
     }
 
     public Set<PreparationMethod> getAvailablePreparationMethods() {
@@ -41,14 +45,6 @@ abstract class Product {
 
     public void setCalorificValue(long calorificValue) {
         this.calorificValue = calorificValue;
-    }
-
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
     }
 
     public boolean isVegan() {
