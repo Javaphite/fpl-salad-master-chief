@@ -8,13 +8,16 @@ import ua.training.logger.TestLifecycleLogger;
 import java.util.EnumSet;
 import java.util.Set;
 
-import static ua.training.fpl.model.products.Product.PreparationMethod.*;
+import static ua.training.fpl.model.products.Product.PreparationMethod.CARAMELIZED;
+import static ua.training.fpl.model.products.Product.PreparationMethod.COLD;
+import static ua.training.fpl.model.products.Product.PreparationMethod.MINCE;
+
 
 public class VegetableTest extends TestLifecycleLogger {
 
     @Test
     @Tag("constructor")
-    public void vegetableAlwaysVeganAfterConstruction() {
+    void vegetableAlwaysVeganAfterConstruction() {
         Product vegetable = new Vegetable();
 
         Assertions.assertTrue(vegetable.isVegan());
@@ -22,7 +25,7 @@ public class VegetableTest extends TestLifecycleLogger {
 
     @Test
     @Tag("setVegan")
-    public void setVeganAlwaysThrowsUnsupportedOperationException() {
+    void setVeganAlwaysThrowsUnsupportedOperationException() {
         Product vegetable = new Vegetable();
 
         Assertions.assertAll(
@@ -33,9 +36,8 @@ public class VegetableTest extends TestLifecycleLogger {
 
     @Test
     @Tag("getAvailablePreparationMethods")
-    public void availablePreparationMethodsOfVegetableNotContainsIrrelevantVariants() {
-        Set<Product.PreparationMethod> irrelevantMethods =
-                EnumSet.of(MINCE, CARAMELIZED, COLD);
+    void availablePreparationMethodsOfVegetableNotContainsIrrelevantVariants() {
+        Set<Product.PreparationMethod> irrelevantMethods = EnumSet.of(MINCE, CARAMELIZED, COLD);
 
         boolean containsIrrelevant = new Vegetable().getAvailablePreparationMethods()
                                         .stream()
@@ -48,9 +50,8 @@ public class VegetableTest extends TestLifecycleLogger {
 
     @Test
     @Tag("getAvailablePreparationMethods")
-    public void availablePreparationMethodsOfVegetableContainsAllRelevantVariants() {
-        Set<Product.PreparationMethod> relevantMethods =
-                EnumSet.of(FRIED, STEWED, BOILED, SMASHED, WARM, FERMENTED, CIRCLE_SLICED, CUBES_SLICED, NONE);
+    void availablePreparationMethodsOfVegetableContainsAllRelevantVariants() {
+        Set<Product.PreparationMethod> relevantMethods = EnumSet.complementOf(EnumSet.of(MINCE, CARAMELIZED, COLD));
         Set<Product.PreparationMethod> vegetableAvailableMethods = new Vegetable().getAvailablePreparationMethods();
 
         boolean containsOnlyRelevant = relevantMethods.stream()
