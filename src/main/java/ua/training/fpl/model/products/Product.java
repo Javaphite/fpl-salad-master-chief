@@ -1,18 +1,21 @@
 package ua.training.fpl.model.products;
 
-import java.util.Collection;
-import java.util.Collections;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.EnumSet;
 import java.util.Set;
 
-abstract class Product {
+public abstract class Product {
+
+    public static final long CALORIES_PER_WEIGHT = 100;
 
     protected String name;
     protected long calorificValue;
-    boolean isVegan;
-    Set<PreparationMethod> preparationSteps;
+    protected boolean isVegan;
 
-    protected enum PreparationMethod {
+    public enum PreparationMethod {
         FRIED,
         BOILED,
         STEWED,
@@ -25,7 +28,7 @@ abstract class Product {
         FERMENTED,
         CARAMELIZED,
         NONE;
-    }
+     }
 
     public Set<PreparationMethod> getAvailablePreparationMethods() {
         return EnumSet.allOf(PreparationMethod.class);
@@ -55,27 +58,40 @@ abstract class Product {
         isVegan = vegan;
     }
 
-    public Set<PreparationMethod> getPreparationSteps() {
-        return Collections.unmodifiableSet(preparationSteps);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Product product = (Product) o;
+
+        return new EqualsBuilder()
+                .append(calorificValue, product.calorificValue)
+                .append(isVegan, product.isVegan)
+                .append(name, product.name)
+                .isEquals();
     }
 
-    public void setPreparationSteps(Set<PreparationMethod> preparationSteps) {
-        this.preparationSteps = preparationSteps;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(name)
+                .append(calorificValue)
+                .append(isVegan)
+                .toHashCode();
     }
 
-    public void addPreparationSteps(Collection<PreparationMethod> preparationSteps) {
-        this.preparationSteps.addAll(preparationSteps);
-    }
-
-    public boolean addPreparationStep(PreparationMethod step) {
-       return preparationSteps.add(step);
-    }
-
-    public void removePreparationSteps(Collection<PreparationMethod> preparationSteps) {
-        this.preparationSteps.removeAll(preparationSteps);
-    }
-
-    public boolean removePreparationStep(PreparationMethod step) {
-        return preparationSteps.remove(step);
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("name", name)
+                .append("calorificValue", calorificValue)
+                .append("isVegan", isVegan)
+                .toString();
     }
 }
