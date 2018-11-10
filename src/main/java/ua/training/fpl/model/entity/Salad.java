@@ -1,17 +1,22 @@
-package ua.training.fpl.model.salads;
+package ua.training.fpl.model.entity;
 
 public class Salad {
 
     private SaladRecipe recipe;
     private int portions;
 
+    public Salad() { }
+
     public Salad(SaladRecipe recipe, int portions) {
         this.recipe = recipe;
-        setPortions(portions);
+        this.portions = portions;
     }
 
     public SaladRecipe getRecipe() {
         return recipe;
+    }
+    public void setRecipe(SaladRecipe recipe) {
+        this.recipe = recipe;
     }
 
     public int getPortions() {
@@ -19,10 +24,6 @@ public class Salad {
     }
 
     public void setPortions(int portions) {
-        if (portions > 0) {
-            this.portions = portions;
-        } else {
-            throw new IllegalArgumentException("Portion quantity shouldn't be less or equal to 0.");
-        }
+        this.portions = portions;
     }
 }
