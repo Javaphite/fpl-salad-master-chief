@@ -1,7 +1,7 @@
 package ua.training.fpl.model.service;
 
 import ua.training.fpl.model.entity.Product;
-import ua.training.fpl.model.entity.SaladRecipe;
+import ua.training.fpl.model.entity.Recipe;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 // TODO: ensure tread-safety
 public class StorageService {
 
-    boolean checkSupplies(SaladRecipe saladRecipe, int portions) {
+    boolean checkSupplies(Recipe recipe, int portions) {
         return true;
     }
 
@@ -17,7 +17,7 @@ public class StorageService {
 
     }
 
-    void removeSupplies(SaladRecipe saladRecipe, int portions) {
+    void removeSupplies(Recipe recipe, int portions) {
 
     }
 }
