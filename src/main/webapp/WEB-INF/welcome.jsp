@@ -13,24 +13,35 @@
 
     <body>
         <h1>Salad Master-Chief App</h1>
-            <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                <label class="onoffswitch-label" for="myonoffswitch">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
-            </div>
-        <br>
+        <form method="GET">
+           <input type="submit" value="Vegan recipes only" onchange="submit()"/>
+           <input type="hidden" name="action" value="displayVeganRecipes"/>
+        </form>
+        <form method="GET">
+              <input type="submit" value="All known recipes" onchange="submit()"/>
+              <input type="hidden" name="action" value="displayKnownRecipes" />
+        </form>
+        <br><br>
         <div>
             <table class="contentTable">
                 <thead>
                     <tr>
-                       <th>Name</th><th>Description</th><th>Portion weight</th><th>Portion calories</th><th>Vegetarian</th>
+                       <th>#</th>
+                       <th>Name</th>
+                       <th>Description</th>
+                       <th>Portion weight</th>
+                       <th>Portion calories</th>
+                       <th>Vegetarian</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="recipe" items="${recipes}">
+                        <c:url var="createSalad" value="">
+                            <c:param name="action" value="createSalad"/>
+                            <c:param name="recipe" value="${recipe.name}"/>
+                        </c:url>
                         <tr>
+                            <td><a href="${createSalad}">LINK</a></td>
                             <td>${recipe.name}</td>
                             <td>${recipe.description}</td>
                             <td>${recipe.weight}</td>
