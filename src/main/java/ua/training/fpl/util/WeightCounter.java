@@ -2,7 +2,7 @@ package ua.training.fpl.util;
 
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Salad;
-import ua.training.fpl.model.entity.SaladRecipe;
+import ua.training.fpl.model.entity.Recipe;
 
 import java.util.Map;
 
@@ -18,8 +18,8 @@ public final class WeightCounter {
         return weightOf(salad.getRecipe()) * salad.getPortions();
     }
 
-    public static long weightOf(SaladRecipe saladRecipe) {
-        return saladRecipe.getComponents()
+    public static long weightOf(Recipe recipe) {
+        return recipe.getComponents()
                 .entrySet()
                 .stream()
                 .mapToLong(Map.Entry::getValue)

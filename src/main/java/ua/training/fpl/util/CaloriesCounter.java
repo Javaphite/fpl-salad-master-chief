@@ -2,7 +2,7 @@ package ua.training.fpl.util;
 
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Salad;
-import ua.training.fpl.model.entity.SaladRecipe;
+import ua.training.fpl.model.entity.Recipe;
 
 public final class CaloriesCounter {
 
@@ -16,8 +16,8 @@ public final class CaloriesCounter {
         return caloriesOf(salad.getRecipe()) * salad.getPortions();
     }
 
-    public static long caloriesOf(SaladRecipe saladRecipe) {
-        return saladRecipe.getComponents()
+    public static long caloriesOf(Recipe recipe) {
+        return recipe.getComponents()
                 .entrySet()
                 .stream()
                 .mapToLong(component -> component.getValue()*getProductCalorificValue(component.getKey()))

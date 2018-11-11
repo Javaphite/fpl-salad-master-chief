@@ -3,7 +3,7 @@ package ua.training.fpl.util;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
 import ua.training.fpl.model.entity.Salad;
-import ua.training.fpl.model.entity.SaladRecipe;
+import ua.training.fpl.model.entity.Recipe;
 
 public final class VeganDetector {
 
@@ -21,8 +21,8 @@ public final class VeganDetector {
         return isVegan(salad.getRecipe());
     }
 
-    public static boolean isVegan(SaladRecipe saladRecipe) {
-        return saladRecipe.getComponents()
+    public static boolean isVegan(Recipe recipe) {
+        return recipe.getComponents()
                 .keySet()
                 .stream()
                 .map(VeganDetector::isVegan)
