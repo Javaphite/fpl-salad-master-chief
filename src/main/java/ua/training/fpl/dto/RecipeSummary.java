@@ -1,6 +1,6 @@
 package ua.training.fpl.dto;
 
-public class SaladRecipeSummary {
+public class RecipeSummary {
 
     private String name;
     private String description;

@@ -2,20 +2,20 @@ package ua.training.fpl.model.entity;
 
 public class Salad {
 
-    private SaladRecipe recipe;
+    private Recipe recipe;
     private int portions;
 
     public Salad() { }
 
-    public Salad(SaladRecipe recipe, int portions) {
+    public Salad(Recipe recipe, int portions) {
         this.recipe = recipe;
         this.portions = portions;
     }
 
-    public SaladRecipe getRecipe() {
+    public Recipe getRecipe() {
         return recipe;
     }
-    public void setRecipe(SaladRecipe recipe) {
+    public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
 

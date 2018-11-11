@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class SaladRecipe {
+public final class Recipe {
 
     private String name;
     private Map<PreparedProduct, Long> components;
 
-    private SaladRecipe(String name, Map<PreparedProduct, Long> components) {
+    private Recipe(String name, Map<PreparedProduct, Long> components) {
         this.name = name;
         this.components = Collections.unmodifiableMap(components);
     }
@@ -54,8 +54,8 @@ public final class SaladRecipe {
             return this;
         }
 
-        public SaladRecipe build() {
-            return new SaladRecipe(name, components);
+        public Recipe build() {
+            return new Recipe(name, components);
         }
      }
 }
