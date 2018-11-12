@@ -2,6 +2,7 @@ package ua.training.fpl.model.entity;
 
 public class Salad {
 
+    private int id;
     private Recipe recipe;
     private int portions;
 
@@ -12,9 +13,18 @@ public class Salad {
         this.portions = portions;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }
+
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }

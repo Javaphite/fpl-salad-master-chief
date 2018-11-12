@@ -14,7 +14,7 @@ public class SortRecipesByCalories implements HttpServletCommand {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        boolean descending = Boolean.valueOf(req.getParameter(Configuration.getOrderingParam()));
+        boolean descending = Boolean.parseBoolean(req.getParameter(Configuration.getOrderingParam()));
         Comparator<RecipeSummary> comparator = Comparator.comparingLong(RecipeSummary::getCalories);
 
         req.setAttribute(Configuration.getRecipesParam(),

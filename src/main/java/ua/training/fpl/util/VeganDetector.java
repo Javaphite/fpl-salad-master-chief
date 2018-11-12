@@ -22,7 +22,7 @@ public final class VeganDetector {
     }
 
     public static boolean isVegan(Recipe recipe) {
-        return recipe.getComponents()
+        return recipe.getProducts()
                 .keySet()
                 .stream()
                 .map(VeganDetector::isVegan)

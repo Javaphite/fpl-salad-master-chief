@@ -6,12 +6,21 @@ import java.util.Map;
 
 public final class Recipe {
 
+    private int id;
     private String name;
-    private Map<PreparedProduct, Long> components;
+    private Map<PreparedProduct, Long> products;
 
     private Recipe(String name, Map<PreparedProduct, Long> components) {
         this.name = name;
-        this.components = Collections.unmodifiableMap(components);
+        this.products = Collections.unmodifiableMap(components);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -22,12 +31,12 @@ public final class Recipe {
         this.name = name;
     }
 
-    public Map<PreparedProduct, Long> getComponents() {
-        return components;
+    public Map<PreparedProduct, Long> getProducts() {
+        return products;
     }
 
-    public void setComponents(Map<PreparedProduct, Long> components) {
-        this.components = components;
+    public void setProdutcs(Map<PreparedProduct, Long> produtcs) {
+        this.products = produtcs;
     }
 
     public static SaladRecipeBuilder builder() {

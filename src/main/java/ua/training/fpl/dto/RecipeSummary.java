@@ -12,39 +12,44 @@ public class RecipeSummary {
         return name;
     }
 
-    public void setName(String name) {
+    public RecipeSummary setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public RecipeSummary setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public long getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public RecipeSummary setWeight(long weight) {
         this.weight = weight;
+        return this;
     }
 
     public long getCalories() {
         return calories;
     }
 
-    public void setCalories(long calories) {
+    public RecipeSummary setCalories(long calories) {
         this.calories = calories;
+        return this;
     }
 
     public boolean isVegan() {
         return vegan;
     }
 
-    public void setVegan(boolean vegan) {
+    public RecipeSummary setVegan(boolean vegan) {
         this.vegan = vegan;
+        return this;
     }
 }

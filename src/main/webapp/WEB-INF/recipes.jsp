@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <h1>Salad Master-Chief App</h1>
+        <h1 align=center>Salad Master-Chief App</h1>
         <form method="GET">
            <input type="submit" value="Vegan recipes only" onchange="submit()"/>
            <input type="hidden" name="action" value="displayVeganRecipes"/>
@@ -23,6 +23,14 @@
         </form>
         <br><br>
         <div>
+            <c:url var="sortRecipesByCaloriesDesc" value="">
+                  <c:param name="action" value="sortRecipesByCalories"/>
+                  <c:param name="descending" value="true"/>
+            </c:url>
+            <c:url var="sortRecipesByCaloriesAsc" value="">
+                  <c:param name="action" value="sortRecipesByCalories"/>
+                  <c:param name="descending" value="false"/>
+            </c:url>
             <table class="contentTable">
                 <thead>
                     <tr>
@@ -30,18 +38,29 @@
                        <th>Name</th>
                        <th>Description</th>
                        <th>Portion weight</th>
-                       <th>Portion calories</th>
+                       <th>
+                            <a href="${sortRecipesByCaloriesAsc}">
+                                <img src="${pageContext.request.contextPath}/img/ascending.png" alt="ASC">
+                            </a>
+                              Portion calories
+                            <a href="${sortRecipesByCaloriesDesc}">
+                                <img src="${pageContext.request.contextPath}/img/descending.png" alt="DESC">
+                            </a>
+                        </th>
                        <th>Vegetarian</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="recipe" items="${recipes}">
-                        <c:url var="createSalad" value="">
-                            <c:param name="action" value="createSalad"/>
-                            <c:param name="recipe" value="${recipe.name}"/>
-                        </c:url>
                         <tr>
-                            <td><a href="${createSalad}">LINK</a></td>
+                            <td>
+                                <form method="POST" value="">
+                                    <input type="text" name="portions" width=3/>
+                                    <input type="hidden" name="action" value="createSalad"/>
+                                    <input type="hidden" name="recipe" value="${recipe.name}"/>
+                                    <input type="image"  src="${pageContext.request.contextPath}/img/ok.png" alt="CREATE"/>
+                                </form>
+                             </td>
                             <td>${recipe.name}</td>
                             <td>${recipe.description}</td>
                             <td>${recipe.weight}</td>

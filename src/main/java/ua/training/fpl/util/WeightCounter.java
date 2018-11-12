@@ -11,7 +11,7 @@ public final class WeightCounter {
     private WeightCounter() {}
 
     public static long weightOf(Salad salad, PreparedProduct product) {
-        return  salad.getRecipe().getComponents().get(product) * salad.getPortions();
+        return  salad.getRecipe().getProducts().get(product) * salad.getPortions();
     }
 
     public static long weightOf(Salad salad) {
@@ -19,7 +19,7 @@ public final class WeightCounter {
     }
 
     public static long weightOf(Recipe recipe) {
-        return recipe.getComponents()
+        return recipe.getProducts()
                 .entrySet()
                 .stream()
                 .mapToLong(Map.Entry::getValue)

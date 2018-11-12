@@ -17,7 +17,7 @@ public final class CaloriesCounter {
     }
 
     public static long caloriesOf(Recipe recipe) {
-        return recipe.getComponents()
+        return recipe.getProducts()
                 .entrySet()
                 .stream()
                 .mapToLong(component -> component.getValue()*getProductCalorificValue(component.getKey()))
