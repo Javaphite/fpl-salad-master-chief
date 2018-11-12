@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class RecipeService implements Service {
+public class RecipeService {
     private Collection<Recipe> knownRecipes = new ArrayList<>();
 
     {
@@ -43,26 +43,29 @@ public class RecipeService implements Service {
     public List<RecipeSummary> getRecipesSorted(Comparator<RecipeSummary> comparator) {
         List<RecipeSummary> recipeSummaries = getKnownRecipes();
         recipeSummaries.sort(comparator);
-
         return recipeSummaries;
     }
 
     public List<RecipeSummary> getRecipesFiltered(Predicate<RecipeSummary> predicate) {
         List<RecipeSummary> recipeSummaries = getKnownRecipes();
         recipeSummaries.removeIf(predicate.negate());
-
         return recipeSummaries;
     }
 
+    // TODO: replace implementation after db layer ready
+    public Recipe getRecipeByName(String name) {
+        return knownRecipes.stream()
+                .filter(recipe -> recipe.getName().equals(name))
+                .findFirst()
+                .get();
+    }
 
     private RecipeSummary getRecipeSummary(Recipe recipe) {
-        RecipeSummary recipeSummary = new RecipeSummary();
-        recipeSummary.setName(recipe.getName());
-        recipeSummary.setCalories(CaloriesCounter.caloriesOf(recipe));
-        recipeSummary.setWeight(WeightCounter.weightOf(recipe));
-        recipeSummary.setVegan(VeganDetector.isVegan(recipe));
-        recipeSummary.setDescription(recipe.toString());
-
-        return recipeSummary;
+        return new RecipeSummary()
+                .setName(recipe.getName())
+                .setCalories(CaloriesCounter.caloriesOf(recipe))
+                .setWeight(WeightCounter.weightOf(recipe))
+                .setVegan(VeganDetector.isVegan(recipe))
+                .setDescription(recipe.toString());
     }
 }
