@@ -2,9 +2,18 @@ package ua.training.fpl.model.entity;
 
 public class Product {
 
+    private int id;
     private String name;
     private long calorificValue;
     private ProductCategory category;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

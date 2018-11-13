@@ -1,5 +1,7 @@
 package ua.training.fpl.model.service;
 
+import ua.training.fpl.config.AccessConfig;
+import ua.training.fpl.dao.SaladDao;
 import ua.training.fpl.dto.SaladComponent;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
@@ -10,27 +12,21 @@ import ua.training.fpl.util.VeganDetector;
 import ua.training.fpl.util.WeightCounter;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class SaladService {
 
-    private Map<Integer, Salad> salads = new HashMap<>();
-    static int nextId=1;
-
     public Salad createSalad(Recipe recipe, int portions) {
-        int id = nextId++;
         Salad salad = new Salad(recipe, portions);
-        salad.setId(id);
-        salads.put(id, salad);
+        SaladDao saladDao = AccessConfig.getDaoFactory().getSaladDao();
+        salad.setId(saladDao.create(salad));
         return salad;
     }
 
     public Salad getSaladById(int id) {
-        return salads.get(id);
+        return AccessConfig.getDaoFactory().getSaladDao().read(id);
     }
 
     public List<SaladComponent> getComponentsSorted(Salad salad, Comparator<SaladComponent> comparator) {

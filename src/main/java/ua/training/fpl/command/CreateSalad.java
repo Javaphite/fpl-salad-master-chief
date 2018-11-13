@@ -1,10 +1,10 @@
 package ua.training.fpl.command;
 
-import ua.training.fpl.Configuration;
+import ua.training.fpl.config.AccessConfig;
+import ua.training.fpl.config.ApplicationConfig;
 import ua.training.fpl.model.entity.Recipe;
 import ua.training.fpl.model.entity.Salad;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -12,14 +12,13 @@ import java.io.IOException;
 public class CreateSalad implements HttpServletCommand {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String recipeName = req.getParameter(Configuration.getRecipeIdentifierParam());
-        Recipe recipe = Configuration.getRecipeService().getRecipeByName(recipeName);
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int recipeId = Integer.parseInt(req.getParameter(ApplicationConfig.getRecipeIdentifierParam()));
+        Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().read(recipeId);
         int portions = Integer.parseInt(req.getParameter("portions"));
 
-        Salad salad = Configuration.getSaladService().createSalad(recipe, portions);
-        req.getSession().setAttribute("saladId", salad.getId());
-        resp.sendRedirect(Configuration.getSaladRedirectionLink(salad.getId()));
+        Salad salad = ApplicationConfig.getSaladService().createSalad(recipe, portions);
+        req.getSession().setAttribute("Id", salad.getId());
+        resp.sendRedirect(ApplicationConfig.getSaladRedirectionLink(salad.getId()));
     }
 }

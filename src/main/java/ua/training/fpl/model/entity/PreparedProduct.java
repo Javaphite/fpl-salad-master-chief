@@ -2,12 +2,16 @@ package ua.training.fpl.model.entity;
 
 public class PreparedProduct {
 
+    private int id;
     private Product product;
     private PreparationMethod preparationMethod;
 
-    public PreparedProduct(Product product, PreparationMethod preparationMethod) {
-        this.product = product;
-        this.preparationMethod = preparationMethod;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Product getProduct() {

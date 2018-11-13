@@ -55,9 +55,9 @@
                         <tr>
                             <td>
                                 <form method="POST" value="">
-                                    <input type="text" name="portions" width=3/>
+                                    <input type="text" name="portions"/>
                                     <input type="hidden" name="action" value="createSalad"/>
-                                    <input type="hidden" name="recipe" value="${recipe.name}"/>
+                                    <input type="hidden" name="recipeId" value="${recipe.id}"/>
                                     <input type="image"  src="${pageContext.request.contextPath}/img/ok.png" alt="CREATE"/>
                                 </form>
                              </td>

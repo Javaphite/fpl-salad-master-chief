@@ -1,4 +1,4 @@
-package ua.training.fpl;
+package ua.training.fpl.config;
 
 import ua.training.fpl.command.CreateSalad;
 import ua.training.fpl.command.DisplayKnownRecipes;
@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class Configuration {
+public final class ApplicationConfig {
 
-    private static final Configuration INSTANCE = new Configuration();
+    private static final ApplicationConfig INSTANCE = new ApplicationConfig();
 
     // Resource access constants
     private String pagePrefix = "/WEB-INF/";
@@ -41,7 +41,7 @@ public final class Configuration {
 
     // JSP params
     private String recipesParam = "recipes";
-    private String recipeIdentifierParam = "recipe";
+    private String recipeIdentifierParam = "recipeId";
     private String orderingParam = "descending";
     private String saladDetailsRedirectTemplate = "./?action=displaySaladDetails&id=";
 
@@ -49,9 +49,9 @@ public final class Configuration {
     private RecipeService recipeService = new RecipeService();
     private SaladService saladService = new SaladService();
 
-    private Configuration() {}
+    private ApplicationConfig() {}
 
-    public static Configuration getInstance() {
+    public static ApplicationConfig getInstance() {
         return INSTANCE;
     }
 

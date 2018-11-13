@@ -2,11 +2,21 @@ package ua.training.fpl.dto;
 
 public class RecipeSummary {
 
+    private int id;
     private String name;
     private String description;
     private long weight;
     private long calories;
     private boolean vegan;
+
+    public int getId() {
+        return id;
+    }
+
+    public RecipeSummary setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;

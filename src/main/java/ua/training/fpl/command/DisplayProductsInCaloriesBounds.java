@@ -1,6 +1,6 @@
 package ua.training.fpl.command;
 
-import ua.training.fpl.Configuration;
+import ua.training.fpl.config.ApplicationConfig;
 import ua.training.fpl.dto.SaladComponent;
 import ua.training.fpl.model.entity.Salad;
 import ua.training.fpl.model.service.SaladService;
@@ -17,9 +17,9 @@ public class DisplayProductsInCaloriesBounds implements HttpServletCommand {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        SaladService service = Configuration.getSaladService();
+        SaladService service = ApplicationConfig.getSaladService();
         int id = (Integer) req.getSession().getAttribute("saladId");
-        Salad salad = Configuration.getSaladService().getSaladById(id);
+        Salad salad = ApplicationConfig.getSaladService().getSaladById(id);
 
         List<SaladComponent> components;
         try {
@@ -33,6 +33,6 @@ public class DisplayProductsInCaloriesBounds implements HttpServletCommand {
 
         req.setAttribute("salad", salad);
         req.setAttribute("components", components);
-        req.getRequestDispatcher(Configuration.getSaladPage()).forward(req, resp);
+        req.getRequestDispatcher(ApplicationConfig.getSaladPage()).forward(req, resp);
     }
 }

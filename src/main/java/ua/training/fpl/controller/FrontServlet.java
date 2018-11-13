@@ -1,7 +1,6 @@
 package ua.training.fpl.controller;
 
-import ua.training.fpl.Configuration;
-import ua.training.fpl.command.DisplayKnownRecipes;
+import ua.training.fpl.config.ApplicationConfig;
 import ua.training.fpl.command.DoFallback;
 import ua.training.fpl.command.HttpServletCommand;
 
@@ -29,7 +28,7 @@ public class FrontServlet extends HttpServlet {
 
     private HttpServletCommand resolveCommand(HttpServletRequest req) {
         Class<? extends HttpServletCommand> commandClazz =
-                Configuration.getCommandMapping().get(req.getParameter("action"));
+                ApplicationConfig.getCommandMapping().get(req.getParameter("action"));
         try {
             return commandClazz.getConstructor().newInstance();
         } catch (Exception exception) {

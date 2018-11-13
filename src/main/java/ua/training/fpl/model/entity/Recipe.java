@@ -10,7 +10,8 @@ public final class Recipe {
     private String name;
     private Map<PreparedProduct, Long> products;
 
-    private Recipe(String name, Map<PreparedProduct, Long> components) {
+    private Recipe(int id, String name, Map<PreparedProduct, Long> components) {
+        this.id = id;
         this.name = name;
         this.products = Collections.unmodifiableMap(components);
     }
@@ -35,36 +36,37 @@ public final class Recipe {
         return products;
     }
 
-    public void setProdutcs(Map<PreparedProduct, Long> produtcs) {
-        this.products = produtcs;
+    public void setProducts(Map<PreparedProduct, Long> products) {
+        this.products = products;
     }
 
-    public static SaladRecipeBuilder builder() {
-        return new SaladRecipeBuilder();
+    public static RecipeBuilder builder() {
+        return new RecipeBuilder();
     }
 
-    public static class SaladRecipeBuilder {
-        private Map<PreparedProduct, Long> components = new HashMap<>();
+    public static class RecipeBuilder {
+        private int recipeId;
         private String name;
+        private Map<PreparedProduct, Long> components = new HashMap<>();
 
-        public SaladRecipeBuilder setName(String name) {
+        public RecipeBuilder setRecipeId(int recipeId) {
+            this.recipeId = recipeId;
+            return this;
+        }
+
+        public RecipeBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public SaladRecipeBuilder addComponent(PreparedProduct product, long weight) {
+        public RecipeBuilder addComponent(PreparedProduct product, long weight) {
             components.putIfAbsent(product, weight);
             components.computeIfPresent(product, (key, value) -> value + weight);
             return this;
         }
 
-        public SaladRecipeBuilder removeComponent(PreparedProduct product) {
-            components.remove(product);
-            return this;
-        }
-
         public Recipe build() {
-            return new Recipe(name, components);
+            return new Recipe(recipeId, name, components);
         }
      }
 }
