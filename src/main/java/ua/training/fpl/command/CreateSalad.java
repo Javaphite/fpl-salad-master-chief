@@ -14,11 +14,11 @@ public class CreateSalad implements HttpServletCommand {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int recipeId = Integer.parseInt(req.getParameter(ApplicationConfig.getRecipeIdentifierParam()));
-        Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().read(recipeId);
+        Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().find(recipeId);
         int portions = Integer.parseInt(req.getParameter("portions"));
 
         Salad salad = ApplicationConfig.getSaladService().createSalad(recipe, portions);
-        req.getSession().setAttribute("Id", salad.getId());
+        req.getSession().setAttribute("id", salad.getId());
         resp.sendRedirect(ApplicationConfig.getSaladRedirectionLink(salad.getId()));
     }
 }

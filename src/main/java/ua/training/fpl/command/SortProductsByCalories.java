@@ -18,12 +18,14 @@ public class SortProductsByCalories implements HttpServletCommand {
             throws ServletException, IOException {
         SaladService service = ApplicationConfig.getSaladService();
         boolean descending = Boolean.parseBoolean(req.getParameter(ApplicationConfig.getOrderingParam()));
-        int id = (Integer) req.getSession().getAttribute("saladId");
+        int id = (Integer) req.getSession().getAttribute("id");
         Salad salad = ApplicationConfig.getSaladService().getSaladById(id);
 
+        Comparator<SaladComponent> comparator = Comparator.comparingLong(SaladComponent::getCalories);
         req.setAttribute("salad", salad);
-        req.setAttribute("components", service.getComponentsSorted(salad,
-                Comparator.comparingLong(SaladComponent::getCalories)));
+        req.setAttribute("components",
+                service.getComponentsSorted(salad, descending? comparator.reversed(): comparator));
+
         req.getRequestDispatcher(ApplicationConfig.getSaladPage()).forward(req, resp);
     }
 }

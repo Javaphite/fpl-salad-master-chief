@@ -18,7 +18,7 @@ public class DisplayProductsInCaloriesBounds implements HttpServletCommand {
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         SaladService service = ApplicationConfig.getSaladService();
-        int id = (Integer) req.getSession().getAttribute("saladId");
+        int id = (Integer) req.getSession().getAttribute("id");
         Salad salad = ApplicationConfig.getSaladService().getSaladById(id);
 
         List<SaladComponent> components;
@@ -31,7 +31,7 @@ public class DisplayProductsInCaloriesBounds implements HttpServletCommand {
             components = service.getComponentsOf(salad);
         }
 
-        req.setAttribute("salad", salad);
+        req.setAttribute("saladSummary", service.getSaladSummary(salad));
         req.setAttribute("components", components);
         req.getRequestDispatcher(ApplicationConfig.getSaladPage()).forward(req, resp);
     }
