@@ -3,6 +3,7 @@ package ua.training.fpl.model.service;
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.dao.SaladDao;
 import ua.training.fpl.dto.SaladComponent;
+import ua.training.fpl.dto.SaladSummary;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
 import ua.training.fpl.model.entity.Salad;
@@ -26,7 +27,7 @@ public class SaladService {
     }
 
     public Salad getSaladById(int id) {
-        return AccessConfig.getDaoFactory().getSaladDao().read(id);
+        return AccessConfig.getDaoFactory().getSaladDao().find(id);
     }
 
     public List<SaladComponent> getComponentsSorted(Salad salad, Comparator<SaladComponent> comparator) {
@@ -42,7 +43,7 @@ public class SaladService {
     }
 
     public List<SaladComponent> getComponentsOf(Salad salad) {
-        return salad.getRecipe().getProducts().keySet().stream()
+         return salad.getRecipe().getProducts().keySet().stream()
                 .map(product -> getSaladComponent(salad, product))
                 .collect(Collectors.toList());
     }
@@ -57,5 +58,14 @@ public class SaladService {
                 .setWeight(WeightCounter.weightOf(salad, preparedProduct))
                 .setCalories(CaloriesCounter.caloriesOf(salad, preparedProduct))
                 .setVegan(VeganDetector.isVegan(product));
+    }
+
+    public SaladSummary getSaladSummary(Salad salad) {
+        return new SaladSummary()
+                .setName(salad.getRecipe().getName())
+                .setPortions(salad.getPortions())
+                .setTotalWeight(WeightCounter.weightOf(salad))
+                .setTotalCalories(CaloriesCounter.caloriesOf(salad))
+                .setVegan(VeganDetector.isVegan(salad));
     }
 }
