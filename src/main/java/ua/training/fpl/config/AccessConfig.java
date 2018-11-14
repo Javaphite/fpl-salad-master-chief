@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.training.fpl.dao.DaoFactory;
 import ua.training.fpl.dao.jdbc.JdbcDaoFactory;
+import ua.training.fpl.exception.UncheckedSQLException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +18,8 @@ public final class AccessConfig {
     private static final Logger LOG = LoggerFactory.getLogger(AccessConfig.class);
     private static final AccessConfig INSTANCE = new AccessConfig();
 
-    private MysqlDataSource dataSource;
-    private DaoFactory daoFactory;
+    private final MysqlDataSource dataSource;
+    private final DaoFactory daoFactory;
 
     private AccessConfig() {
         daoFactory = new JdbcDaoFactory();
@@ -30,7 +31,7 @@ public final class AccessConfig {
             dataSource.setUseSSL(false);
         } catch(SQLException exception) {
             LOG.error("Data source exception: ", exception);
-            throw new RuntimeException(exception);
+            throw new UncheckedSQLException(exception);
         }
     }
 
@@ -41,7 +42,7 @@ public final class AccessConfig {
              return connection;
         } catch(SQLException exception) {
             LOG.error("Connection establishment exception: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 
@@ -50,7 +51,7 @@ public final class AccessConfig {
             return Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException exception) {
             LOG.error("Statement creation exception: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 
