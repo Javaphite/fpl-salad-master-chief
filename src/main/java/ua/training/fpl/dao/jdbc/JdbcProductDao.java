@@ -2,6 +2,7 @@ package ua.training.fpl.dao.jdbc;
 
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.dao.ProductDao;
+import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.Product;
 
 import java.sql.Connection;
@@ -31,12 +32,12 @@ public class JdbcProductDao implements ProductDao {
            }
         } catch (SQLException exception) {
             LOG.error("Product insertion failed: ", exception);
-            return -1;
+           throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public Product read(int id) {
+    public Product find(int id) {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,
                      "SELECT * FROM products WHERE productId=?")) {
@@ -54,7 +55,7 @@ public class JdbcProductDao implements ProductDao {
             return product;
         } catch (SQLException exception) {
             LOG.error("Product reading failed: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 }

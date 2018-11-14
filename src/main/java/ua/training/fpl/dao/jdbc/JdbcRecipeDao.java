@@ -2,6 +2,7 @@ package ua.training.fpl.dao.jdbc;
 
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.dao.RecipeDao;
+import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Recipe;
 
@@ -38,12 +39,12 @@ public class JdbcRecipeDao implements RecipeDao {
             }
         } catch (SQLException exception) {
             LOG.error("Recipe insertion failed: ", exception);
-            return -1;
+            throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public Recipe read(int id) {
+    public Recipe find(int id) {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,
                      "SELECT * FROM recipes WHERE recipesId=?")) {
@@ -56,24 +57,24 @@ public class JdbcRecipeDao implements RecipeDao {
                         .setName(results.getNString(2));
 
                 AccessConfig.getDaoFactory().getPreparedProductDao()
-                        .readAllOfRecipe(id)
+                        .findAllOfRecipe(id)
                         .forEach(builder::addComponent);
                 recipe = builder.build();
             }
             return recipe;
         } catch (SQLException exception) {
             LOG.error("Recipe reading failed: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public List<Recipe> readAll() {
-        List<Recipe> recipes = new ArrayList<>();
+    public List<Recipe> findAll() {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,"SELECT * FROM recipes")) {
             ResultSet results = statement.executeQuery();
 
+            List<Recipe> recipes = new ArrayList<>();
             while (results.next()) {
                 int id = results.getInt(1);
                 Recipe.RecipeBuilder builder = Recipe.builder()
@@ -81,14 +82,14 @@ public class JdbcRecipeDao implements RecipeDao {
                         .setName(results.getNString(2));
 
                 AccessConfig.getDaoFactory().getPreparedProductDao()
-                        .readAllOfRecipe(id)
+                        .findAllOfRecipe(id)
                         .forEach(builder::addComponent);
                 recipes.add(builder.build());
             }
             return recipes;
         } catch (SQLException exception) {
             LOG.error("Recipes reading failed: ", exception);
-            return Collections.emptyList();
+            throw new UncheckedSQLException(exception);
         }
     }
 
@@ -105,7 +106,7 @@ public class JdbcRecipeDao implements RecipeDao {
             return true;
         } catch (SQLException exception) {
             LOG.error("Products-in-Recipes information update failed: ", exception);
-            return false;
+            throw new UncheckedSQLException(exception);
         }
     }
 }

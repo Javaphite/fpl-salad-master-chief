@@ -2,8 +2,7 @@ package ua.training.fpl.dao.jdbc;
 
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.dao.SaladDao;
-import ua.training.fpl.model.entity.PreparedProduct;
-import ua.training.fpl.model.entity.Product;
+import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.Recipe;
 import ua.training.fpl.model.entity.Salad;
 
@@ -32,15 +31,15 @@ public class JdbcSaladDao implements SaladDao {
             }
         } catch (SQLException exception) {
             LOG.error("Salad insertion failed: ", exception);
-            return -1;
+            throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public Salad read(int id) {
+    public Salad find(int id) {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,
-                     "SELECT * FROM salads WHERE saladsId=?")) {
+                     "SELECT * FROM salads WHERE saladId=?")) {
             statement.setInt(1, id);
             ResultSet results = statement.executeQuery();
 
@@ -49,13 +48,13 @@ public class JdbcSaladDao implements SaladDao {
                 salad = new Salad();
                 salad.setId(results.getInt(1));
                 salad.setPortions(results.getInt(2));
-                Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().read(results.getInt(3));
+                Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().find(results.getInt(3));
                 salad.setRecipe(recipe);
             }
             return salad;
         } catch (SQLException exception) {
             LOG.error("Salad reading failed: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 }

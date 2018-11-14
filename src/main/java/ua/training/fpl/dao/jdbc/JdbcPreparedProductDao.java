@@ -2,6 +2,7 @@ package ua.training.fpl.dao.jdbc;
 
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.dao.PreparedProductDao;
+import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
 
@@ -33,12 +34,12 @@ public class JdbcPreparedProductDao implements PreparedProductDao {
             }
         } catch (SQLException exception) {
             LOG.error("Prepared product insertion failed: ", exception);
-            return -1;
+            throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public PreparedProduct read(int id) {
+    public PreparedProduct find(int id) {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,
                      "SELECT * FROM prepared_products WHERE preparedProductId=?")) {
@@ -49,35 +50,35 @@ public class JdbcPreparedProductDao implements PreparedProductDao {
             if (results.next()) {
                 preparedProduct.setId(results.getInt(1));
                 Product product =
-                        AccessConfig.getDaoFactory().getProductDao().read(results.getInt(2));
+                        AccessConfig.getDaoFactory().getProductDao().find(results.getInt(2));
                 preparedProduct.setProduct(product);
                 preparedProduct.setPreparationMethod(PreparedProduct.PreparationMethod.valueOf(results.getNString(3)));
             }
             return preparedProduct;
         } catch (SQLException exception) {
             LOG.error("Prepared product reading failed: ", exception);
-            return null;
+            throw new UncheckedSQLException(exception);
         }
     }
 
     @Override
-    public Map<PreparedProduct, Long> readAllOfRecipe(int recipeId) {
-        Map<PreparedProduct, Long> productsInRecipe = new HashMap<>();
+    public Map<PreparedProduct, Long> findAllOfRecipe(int recipeId) {
         try (Connection connection = AccessConfig.getConnection();
              PreparedStatement statement = AccessConfig.getStatement(connection,
                      "SELECT * FROM products_in_recipes WHERE recipeId=?")) {
             statement.setInt(1, recipeId);
             ResultSet results = statement.executeQuery();
 
+            Map<PreparedProduct, Long> productsInRecipe = new HashMap<>();
             while (results.next()) {
                 int preparedProductId = results.getInt(3);
                 long weight = results.getLong(4);
-                productsInRecipe.put(read(preparedProductId), weight);
+                productsInRecipe.put(find(preparedProductId), weight);
             }
             return productsInRecipe;
         } catch (SQLException exception) {
             LOG.error("Prepared product reading failed: ", exception);
-            return Collections.emptyMap();
+            throw new UncheckedSQLException(exception);
         }
     }
 }
