@@ -5,7 +5,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            <%@include file="/switch_on_off.css" %>
             <%@include file="/content_tables.css" %>
          </style>
         <title>Welcome</title>

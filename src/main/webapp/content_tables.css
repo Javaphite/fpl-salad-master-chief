@@ -37,7 +37,7 @@ table.contentTable thead th:first-child {
 table.contentTable tfoot {
   font-size: 14px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #000000;
   background: #F4F56E;
   background: -moz-linear-gradient(top, #f7f792 0%, #f5f67c 66%, #F4F56E 100%);
   background: -webkit-linear-gradient(top, #f7f792 0%, #f5f67c 66%, #F4F56E 100%);

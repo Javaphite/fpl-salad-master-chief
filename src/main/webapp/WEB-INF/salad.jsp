@@ -5,15 +5,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            <%@include file="/switch_on_off.css" %>
             <%@include file="/content_tables.css" %>
          </style>
         <title>Salad</title>
     </head>
 
     <body>
-        <h1 align=center>${salad.recipe.name}</h1>
-        <h2 align=center>(portions x${salad.portions})</h2>
+        <h1 align=center>${saladSummary.name}</h1>
+        <h2 align=center>(portions x${saladSummary.portions})</h2>
         <form method="GET">
            <input type="submit" value="Filter products: " onchange="submit()"/>
            <input type="text" name="from"/> - <input type="text" name="to"/> calories
@@ -66,6 +65,12 @@
                         </tr>
                     </c:forEach>
                  </tbody>
+                 <tfoot>
+                    <td colspan=4 alignment=left> TOTAL: </td>
+                    <td>${saladSummary.totalWeight}</td>
+                    <td>${saladSummary.totalCalories}</td>
+                    <td>${saladSummary.vegan}</td>
+                 </tfoot>
             </table>
          </div>
     </body>

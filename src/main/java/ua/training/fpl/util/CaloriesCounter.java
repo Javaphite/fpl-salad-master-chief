@@ -9,7 +9,7 @@ public final class CaloriesCounter {
     private CaloriesCounter() {}
 
     public static long caloriesOf(Salad salad, PreparedProduct product) {
-        return getProductCalorificValue(product) * salad.getPortions();
+        return getProductCalorificValue(product)*WeightCounter.weightOf(salad, product)/100;
     }
 
     public static long caloriesOf(Salad salad) {
