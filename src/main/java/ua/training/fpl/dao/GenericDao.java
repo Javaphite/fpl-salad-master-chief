@@ -9,5 +9,5 @@ public interface GenericDao<T> {
 
     int create(T entity);
 
-    T read(int id);
+    T find(int id);
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface RecipeDao extends GenericDao<Recipe> {
 
-    List<Recipe> readAll();
+    List<Recipe> findAll();
 }

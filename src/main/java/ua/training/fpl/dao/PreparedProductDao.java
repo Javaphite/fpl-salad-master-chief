@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface PreparedProductDao extends GenericDao<PreparedProduct> {
 
-    Map<PreparedProduct, Long> readAllOfRecipe(int recipeId);
+    Map<PreparedProduct, Long> findAllOfRecipe(int recipeId);
 }
