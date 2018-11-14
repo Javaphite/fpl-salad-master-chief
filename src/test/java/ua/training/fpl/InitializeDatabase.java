@@ -52,34 +52,34 @@ public class InitializeDatabase {
         PreparedProductDao preparedProductDao = AccessConfig.getDaoFactory().getPreparedProductDao();
 
         PreparedProduct boiledEggs = new PreparedProduct();
-        boiledEggs.setProduct(productDao.read(productDao.create(eggs)));
+        boiledEggs.setProduct(productDao.find(productDao.create(eggs)));
         boiledEggs.setPreparationMethod(PreparedProduct.PreparationMethod.BOILED);
-        boiledEggs = preparedProductDao.read(preparedProductDao.create(boiledEggs));
+        boiledEggs = preparedProductDao.find(preparedProductDao.create(boiledEggs));
 
         PreparedProduct rawOliveOil = new PreparedProduct();
-        rawOliveOil.setProduct(productDao.read(productDao.create(oliveOil)));
+        rawOliveOil.setProduct(productDao.find(productDao.create(oliveOil)));
         rawOliveOil.setPreparationMethod(PreparedProduct.PreparationMethod.RAW);
-        rawOliveOil = preparedProductDao.read(preparedProductDao.create(rawOliveOil));
+        rawOliveOil = preparedProductDao.find(preparedProductDao.create(rawOliveOil));
 
         PreparedProduct rawTomato = new PreparedProduct();
-        rawTomato.setProduct(productDao.read(productDao.create(tomato)));
+        rawTomato.setProduct(productDao.find(productDao.create(tomato)));
         rawTomato.setPreparationMethod(PreparedProduct.PreparationMethod.RAW);
-        rawTomato = preparedProductDao.read(preparedProductDao.create(rawTomato));
+        rawTomato = preparedProductDao.find(preparedProductDao.create(rawTomato));
 
         PreparedProduct rawLettuce = new PreparedProduct();
-        rawLettuce.setProduct(productDao.read(productDao.create(lettuce)));
+        rawLettuce.setProduct(productDao.find(productDao.create(lettuce)));
         rawLettuce.setPreparationMethod(PreparedProduct.PreparationMethod.RAW);
-        rawLettuce = preparedProductDao.read(preparedProductDao.create(rawLettuce));
+        rawLettuce = preparedProductDao.find(preparedProductDao.create(rawLettuce));
 
         PreparedProduct stewedCauliflower = new PreparedProduct();
-        stewedCauliflower.setProduct(productDao.read(productDao.create(cauliflower)));
+        stewedCauliflower.setProduct(productDao.find(productDao.create(cauliflower)));
         stewedCauliflower.setPreparationMethod(PreparedProduct.PreparationMethod.STEWED);
-        stewedCauliflower = preparedProductDao.read(preparedProductDao.create(stewedCauliflower));
+        stewedCauliflower = preparedProductDao.find(preparedProductDao.create(stewedCauliflower));
 
         PreparedProduct rawAssortedVegetables = new PreparedProduct();
-        rawAssortedVegetables.setProduct(productDao.read(productDao.create(assortedVegetables)));
+        rawAssortedVegetables.setProduct(productDao.find(productDao.create(assortedVegetables)));
         rawAssortedVegetables.setPreparationMethod(PreparedProduct.PreparationMethod.RAW);
-        rawAssortedVegetables = preparedProductDao.read(preparedProductDao.create(rawAssortedVegetables));
+        rawAssortedVegetables = preparedProductDao.find(preparedProductDao.create(rawAssortedVegetables));
 
         // RECIPES:
         Recipe egyptianEggSalad = Recipe.builder()
