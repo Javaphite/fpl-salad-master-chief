@@ -8,7 +8,6 @@ import ua.training.fpl.model.entity.Salad;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 public class CreateSalad implements HttpServletCommand {
 
@@ -18,7 +17,7 @@ public class CreateSalad implements HttpServletCommand {
         Recipe recipe = AccessConfig.getDaoFactory().getRecipeDao().find(recipeId);
         int portions = Integer.parseInt(req.getParameter("portions"));
 
-        Salad salad = ApplicationConfig.getSaladService().createSalad(Objects.requireNonNull(recipe), portions);
+        Salad salad = ApplicationConfig.getSaladService().createSalad(recipe, portions);
         req.getSession().setAttribute("id", salad.getId());
         resp.sendRedirect(ApplicationConfig.getSaladRedirectionLink(salad.getId()));
     }
