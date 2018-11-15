@@ -1,5 +1,8 @@
 package ua.training.fpl.model.entity;
 
+/**
+ * Entity for product representation.
+ */
 public class Product {
 
     private int id;

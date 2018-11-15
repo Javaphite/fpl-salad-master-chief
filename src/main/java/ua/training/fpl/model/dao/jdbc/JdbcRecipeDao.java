@@ -1,7 +1,9 @@
-package ua.training.fpl.dao.jdbc;
+package ua.training.fpl.model.dao.jdbc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.training.fpl.config.AccessConfig;
-import ua.training.fpl.dao.RecipeDao;
+import ua.training.fpl.model.dao.RecipeDao;
 import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Recipe;
@@ -11,10 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class JdbcRecipeDao implements RecipeDao {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcRecipeDao.class);
 
     @Override
     public int create(Recipe recipe) {

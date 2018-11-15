@@ -7,6 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Entity for recipe representation.
+ */
 public final class Recipe {
 
     private int id;
@@ -52,6 +55,7 @@ public final class Recipe {
         private String name;
         private Map<PreparedProduct, Long> components;
 
+        // Accumulates data in SortedMap to predict order of elements.
         private RecipeBuilder() {
             Comparator<PreparedProduct> comparator =
                     Comparator.comparing(component -> component.getProduct().getCalorificValue());
@@ -68,6 +72,12 @@ public final class Recipe {
             return this;
         }
 
+        /**
+         * Adds product with weight or accumulates weight if product already added
+         * @param product
+         * @param weight
+         * @return
+         */
         public RecipeBuilder addComponent(PreparedProduct product, long weight) {
             components.computeIfPresent(product, (key, value) -> value + weight);
             components.putIfAbsent(product, weight);

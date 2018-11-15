@@ -1,13 +1,13 @@
 package ua.training.fpl.config;
 
-import ua.training.fpl.command.CreateSalad;
-import ua.training.fpl.command.DisplayKnownRecipes;
-import ua.training.fpl.command.DisplayProductsInCaloriesBounds;
-import ua.training.fpl.command.DisplaySaladDetails;
-import ua.training.fpl.command.DisplayVeganRecipes;
-import ua.training.fpl.command.HttpServletCommand;
-import ua.training.fpl.command.SortProductsByCalories;
-import ua.training.fpl.command.SortRecipesByCalories;
+import ua.training.fpl.controller.command.CreateSalad;
+import ua.training.fpl.controller.command.DisplayKnownRecipes;
+import ua.training.fpl.controller.command.DisplayProductsInCaloriesBounds;
+import ua.training.fpl.controller.command.DisplaySaladDetails;
+import ua.training.fpl.controller.command.DisplayVeganRecipes;
+import ua.training.fpl.controller.command.HttpServletCommand;
+import ua.training.fpl.controller.command.SortProductsByCalories;
+import ua.training.fpl.controller.command.SortRecipesByCalories;
 import ua.training.fpl.model.service.RecipeService;
 import ua.training.fpl.model.service.SaladService;
 
@@ -15,6 +15,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Global configuration class for common application concerns.
+ */
 public final class ApplicationConfig {
 
     private static final ApplicationConfig INSTANCE = new ApplicationConfig();

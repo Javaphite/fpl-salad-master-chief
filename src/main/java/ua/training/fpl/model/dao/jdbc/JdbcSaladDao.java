@@ -1,7 +1,9 @@
-package ua.training.fpl.dao.jdbc;
+package ua.training.fpl.model.dao.jdbc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.training.fpl.config.AccessConfig;
-import ua.training.fpl.dao.SaladDao;
+import ua.training.fpl.model.dao.SaladDao;
 import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.Recipe;
 import ua.training.fpl.model.entity.Salad;
@@ -12,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JdbcSaladDao implements SaladDao {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcSaladDao.class);
 
     @Override
     public int create(Salad salad) {

@@ -2,6 +2,9 @@ package ua.training.fpl.exception;
 
 import java.sql.SQLException;
 
+/**
+ * Unchecked exception wrapper for SQLException.
+ */
 public class UncheckedSQLException extends RuntimeException {
 
     public UncheckedSQLException() { }

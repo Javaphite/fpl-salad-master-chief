@@ -1,9 +1,9 @@
 package ua.training.fpl;
 
 import ua.training.fpl.config.AccessConfig;
-import ua.training.fpl.dao.PreparedProductDao;
-import ua.training.fpl.dao.ProductDao;
-import ua.training.fpl.dao.RecipeDao;
+import ua.training.fpl.model.dao.PreparedProductDao;
+import ua.training.fpl.model.dao.ProductDao;
+import ua.training.fpl.model.dao.RecipeDao;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
 import ua.training.fpl.model.entity.Recipe;

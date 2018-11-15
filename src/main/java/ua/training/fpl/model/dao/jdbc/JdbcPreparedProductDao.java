@@ -1,7 +1,9 @@
-package ua.training.fpl.dao.jdbc;
+package ua.training.fpl.model.dao.jdbc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.training.fpl.config.AccessConfig;
-import ua.training.fpl.dao.PreparedProductDao;
+import ua.training.fpl.model.dao.PreparedProductDao;
 import ua.training.fpl.exception.UncheckedSQLException;
 import ua.training.fpl.model.entity.PreparedProduct;
 import ua.training.fpl.model.entity.Product;
@@ -10,12 +12,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class JdbcPreparedProductDao implements PreparedProductDao {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcPreparedProductDao.class);
 
     @Override
     public int create(PreparedProduct preparedProduct) {

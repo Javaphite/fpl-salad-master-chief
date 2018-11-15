@@ -3,8 +3,8 @@ package ua.training.fpl.config;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ua.training.fpl.dao.DaoFactory;
-import ua.training.fpl.dao.jdbc.JdbcDaoFactory;
+import ua.training.fpl.model.dao.DaoFactory;
+import ua.training.fpl.model.dao.jdbc.JdbcDaoFactory;
 import ua.training.fpl.exception.UncheckedSQLException;
 
 import java.sql.Connection;
@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 
+/**
+ * Global configuration class of all access concerns.
+ */
 public final class AccessConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccessConfig.class);

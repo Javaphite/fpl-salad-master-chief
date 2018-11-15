@@ -1,4 +1,4 @@
-package ua.training.fpl.command;
+package ua.training.fpl.controller.command;
 
 import ua.training.fpl.config.AccessConfig;
 import ua.training.fpl.config.ApplicationConfig;
@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command for creation of new salad.
+ */
 public class CreateSalad implements HttpServletCommand {
 
     @Override

@@ -1,10 +1,10 @@
-package ua.training.fpl.dao.jdbc;
+package ua.training.fpl.model.dao.jdbc;
 
-import ua.training.fpl.dao.DaoFactory;
-import ua.training.fpl.dao.PreparedProductDao;
-import ua.training.fpl.dao.ProductDao;
-import ua.training.fpl.dao.RecipeDao;
-import ua.training.fpl.dao.SaladDao;
+import ua.training.fpl.model.dao.DaoFactory;
+import ua.training.fpl.model.dao.PreparedProductDao;
+import ua.training.fpl.model.dao.ProductDao;
+import ua.training.fpl.model.dao.RecipeDao;
+import ua.training.fpl.model.dao.SaladDao;
 
 public class JdbcDaoFactory implements DaoFactory {
 

@@ -1,4 +1,4 @@
-package ua.training.fpl.dao;
+package ua.training.fpl.model.dao;
 
 public interface DaoFactory {
 

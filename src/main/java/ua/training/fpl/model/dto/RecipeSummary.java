@@ -1,5 +1,11 @@
-package ua.training.fpl.dto;
+package ua.training.fpl.model.dto;
 
+import ua.training.fpl.model.entity.Recipe;
+
+/**
+ * Simple DTO for transporting summarized information about
+ * particular {@link Recipe} from model to views.
+ */
 public class RecipeSummary {
 
     private int id;

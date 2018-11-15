@@ -1,12 +1,18 @@
-package ua.training.fpl.dto;
+package ua.training.fpl.model.dto;
 
+import ua.training.fpl.model.entity.Salad;
+
+/**
+ * Simple DTO for transporting summarized information about
+ * particular {@link Salad} from model to views.
+ */
 public class SaladSummary {
 
-    String name;
-    int portions;
-    long totalWeight;
-    long totalCalories;
-    boolean vegan;
+    private String name;
+    private int portions;
+    private long totalWeight;
+    private long totalCalories;
+    private boolean vegan;
 
     public String getName() {
         return name;

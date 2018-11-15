@@ -1,5 +1,8 @@
 package ua.training.fpl.model.entity;
 
+/**
+ * Entity for salad representation.
+ */
 public class Salad {
 
     private int id;

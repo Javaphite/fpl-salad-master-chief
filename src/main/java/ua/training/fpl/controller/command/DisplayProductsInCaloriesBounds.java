@@ -1,7 +1,7 @@
-package ua.training.fpl.command;
+package ua.training.fpl.controller.command;
 
 import ua.training.fpl.config.ApplicationConfig;
-import ua.training.fpl.dto.SaladComponent;
+import ua.training.fpl.model.dto.SaladComponent;
 import ua.training.fpl.model.entity.Salad;
 import ua.training.fpl.model.service.SaladService;
 import ua.training.fpl.util.Numbers;
@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Command to filter products in particular {@link Salad} instance
+ * leaving only those ones in bounds defined in context.
+ */
 public class DisplayProductsInCaloriesBounds implements HttpServletCommand {
 
     @Override
