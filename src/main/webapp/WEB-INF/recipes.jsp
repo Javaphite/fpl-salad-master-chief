@@ -41,7 +41,7 @@
                             <a href="${sortRecipesByCaloriesAsc}">
                                 <img src="${pageContext.request.contextPath}/img/ascending.png" alt="ASC">
                             </a>
-                              Portion calories
+                            Portion calories
                             <a href="${sortRecipesByCaloriesDesc}">
                                 <img src="${pageContext.request.contextPath}/img/descending.png" alt="DESC">
                             </a>
@@ -53,13 +53,13 @@
                     <c:forEach var="recipe" items="${recipes}">
                         <tr>
                             <td>
-                                <form method="POST" value="">
+                                <form method="GET" value="./">
                                     <input type="text" name="portions"/>
                                     <input type="hidden" name="action" value="createSalad"/>
                                     <input type="hidden" name="recipeId" value="${recipe.id}"/>
                                     <input type="image"  src="${pageContext.request.contextPath}/img/ok.png" alt="CREATE"/>
                                 </form>
-                             </td>
+                            </td>
                             <td>${recipe.name}</td>
                             <td>${recipe.description}</td>
                             <td>${recipe.weight}</td>

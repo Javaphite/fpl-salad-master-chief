@@ -44,7 +44,7 @@
                             <a href="${sortProductsByCaloriesAsc}">
                                 <img src="${pageContext.request.contextPath}/img/ascending.png" alt="ASC">
                             </a>
-                              Calories
+                            Calories
                             <a href="${sortProductsByCaloriesDesc}">
                                 <img src="${pageContext.request.contextPath}/img/descending.png" alt="DESC">
                             </a>

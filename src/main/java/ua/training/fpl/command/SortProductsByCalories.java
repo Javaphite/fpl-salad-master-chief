@@ -22,7 +22,7 @@ public class SortProductsByCalories implements HttpServletCommand {
         Salad salad = ApplicationConfig.getSaladService().getSaladById(id);
 
         Comparator<SaladComponent> comparator = Comparator.comparingLong(SaladComponent::getCalories);
-        req.setAttribute("salad", salad);
+        req.setAttribute("saladSummary", service.getSaladSummary(salad));
         req.setAttribute("components",
                 service.getComponentsSorted(salad, descending? comparator.reversed(): comparator));
 

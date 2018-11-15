@@ -6,10 +6,12 @@ import ua.training.fpl.model.entity.Recipe;
 
 public final class CaloriesCounter {
 
+    private static final int CALORIES_CONSTANT = 100;
+
     private CaloriesCounter() {}
 
     public static long caloriesOf(Salad salad, PreparedProduct product) {
-        return getProductCalorificValue(product)*WeightCounter.weightOf(salad, product)/100;
+        return getCaloriesOfWeight(getCalorificValue(product), WeightCounter.weightOf(salad, product));
     }
 
     public static long caloriesOf(Salad salad) {
@@ -20,11 +22,17 @@ public final class CaloriesCounter {
         return recipe.getProducts()
                 .entrySet()
                 .stream()
-                .mapToLong(component -> component.getValue()*getProductCalorificValue(component.getKey()))
+                .mapToLong(component ->
+                        getCaloriesOfWeight(component.getValue(), getCalorificValue(component.getKey())))
                 .sum();
     }
 
-    private static long getProductCalorificValue(PreparedProduct preparedProduct) {
+    private static long getCalorificValue(PreparedProduct preparedProduct) {
         return preparedProduct.getProduct().getCalorificValue();
+    }
+
+    private static long getCaloriesOfWeight(long calorificValue, long weight) {
+        long transit = calorificValue*weight;
+        return transit/CALORIES_CONSTANT + transit%CALORIES_CONSTANT;
     }
 }

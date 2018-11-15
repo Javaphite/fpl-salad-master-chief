@@ -5,8 +5,8 @@
     <groupId>ua.training</groupId>
     <artifactId>fpl-salad-master-chief</artifactId>
     <packaging>war</packaging>
-    <version>0.1-SNAPSHOT</version>
-    <name>fpl-salad-master-chief</name>
+    <version>0.9</version>
+    <name>master-chief</name>
 
     <properties>
         <slf4j-api.version>1.7.25</slf4j-api.version>
@@ -110,7 +110,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.name}-${project.version}</finalName>
+        <finalName>${project.name}</finalName>
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>

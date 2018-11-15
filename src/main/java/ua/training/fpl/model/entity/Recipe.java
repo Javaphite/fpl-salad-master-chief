@@ -1,8 +1,11 @@
 package ua.training.fpl.model.entity;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public final class Recipe {
 
@@ -47,7 +50,13 @@ public final class Recipe {
     public static class RecipeBuilder {
         private int recipeId;
         private String name;
-        private Map<PreparedProduct, Long> components = new HashMap<>();
+        private Map<PreparedProduct, Long> components;
+
+        private RecipeBuilder() {
+            Comparator<PreparedProduct> comparator =
+                    Comparator.comparing(component -> component.getProduct().getCalorificValue());
+            components = new TreeMap<>(comparator);
+        }
 
         public RecipeBuilder setRecipeId(int recipeId) {
             this.recipeId = recipeId;
@@ -60,8 +69,8 @@ public final class Recipe {
         }
 
         public RecipeBuilder addComponent(PreparedProduct product, long weight) {
-            components.putIfAbsent(product, weight);
             components.computeIfPresent(product, (key, value) -> value + weight);
+            components.putIfAbsent(product, weight);
             return this;
         }
 

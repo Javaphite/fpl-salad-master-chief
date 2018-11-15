@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 public class DisplaySaladDetails implements HttpServletCommand {
 
@@ -17,7 +16,7 @@ public class DisplaySaladDetails implements HttpServletCommand {
             throws ServletException, IOException {
         SaladService service = ApplicationConfig.getSaladService();
         int id = (Integer) req.getSession().getAttribute("id");
-        Salad salad = Objects.requireNonNull(service.getSaladById(id));
+        Salad salad = service.getSaladById(id);
 
         req.setAttribute("saladSummary", service.getSaladSummary(salad));
         req.setAttribute("components", service.getComponentsOf(salad));
