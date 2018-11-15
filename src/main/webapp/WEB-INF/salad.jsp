@@ -1,26 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<c:set var="language"
+value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+scope="session"/>
+<fmt:setLocale value="${language}" scope="session"/>
+<fmt:setBundle basename="interface"/>
+
+<html lang=${language}>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            <%@include file="/content_tables.css" %>
+            <%@include file="/styles/content_tables.css" %>
          </style>
         <title>Salad</title>
     </head>
 
     <body>
         <h1 align=center>${saladSummary.name}</h1>
-        <h2 align=center>(portions x${saladSummary.portions})</h2>
+        <h2 align=center>(<fmt:message key="salad.portions"/> x ${saladSummary.portions})</h2>
         <form method="GET">
-           <input type="submit" value="Filter products: " onchange="submit()"/>
-           <input type="text" name="from"/> - <input type="text" name="to"/> calories
+           <input type="submit" value="<fmt:message key="salad.button.filter"/>" onchange="submit()"/>
+           <input type="text" name="from"/> - <input type="text" name="to"/>
+                <fmt:message key="salad.button.filter.calories"/>
            <input type="hidden" name="action" value="displayProductsInCaloriesBounds"/>
         </form>
         <form method="GET">
-              <input type="submit" value="Display all" onchange="submit()"/>
-              <input type="hidden" name="action" value="displaySaladDetails" />
+              <input type="submit" value="<fmt:message key="salad.button.all"/>" onchange="submit()"/>
+              <input type="hidden" name="action" value="displaySaladDetails"/>
         </form>
         <br><br>
         <div>
@@ -35,21 +43,20 @@
             <table class="contentTable">
                 <thead>
                     <tr>
-                       <th>Product</th>
-                       <th>Category</th>
-                       <th>Preparation method</th>
-                       <th>Calorific value</th>
-                       <th>Weight</th>
+                       <th><fmt:message key="salad.table.product"/></th>
+                       <th><fmt:message key="salad.table.category"/></th>
+                       <th><fmt:message key="salad.table.preparation"/></th>
+                       <th><fmt:message key="salad.table.calorificValue"/></th>
+                       <th><fmt:message key="salad.table.weight"/></th>
                        <th>
                             <a href="${sortProductsByCaloriesAsc}">
                                 <img src="${pageContext.request.contextPath}/img/ascending.png" alt="ASC">
-                            </a>
-                            Calories
+                            </a><fmt:message key="salad.table.calories"/>
                             <a href="${sortProductsByCaloriesDesc}">
                                 <img src="${pageContext.request.contextPath}/img/descending.png" alt="DESC">
                             </a>
                         </th>
-                        <th>Vegetarian</th>
+                        <th><fmt:message key="salad.table.vegan"/></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +73,7 @@
                     </c:forEach>
                  </tbody>
                  <tfoot>
-                    <td colspan=4 alignment=left> TOTAL: </td>
+                    <td colspan=4 alignment=left><fmt:message key="salad.table.total"/></td>
                     <td>${saladSummary.totalWeight}</td>
                     <td>${saladSummary.totalCalories}</td>
                     <td>${saladSummary.vegan}</td>

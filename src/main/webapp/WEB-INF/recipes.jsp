@@ -1,23 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language"
+value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+scope="session"/>
+<fmt:setLocale value="${language}" scope="session"/>
+<fmt:setBundle basename="interface"/>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            <%@include file="/content_tables.css" %>
+            <%@include file="/styles/content_tables.css" %>
          </style>
-        <title>Welcome</title>
+        <title>Recipes</title>
     </head>
 
     <body>
-        <h1 align=center>Salad Master-Chief App</h1>
+        <form>
+           <select id="language" name="language" onchange="submit()">
+               <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+               <option value="uk" ${language == 'uk' ? 'selected' : ''}>Українська</option>
+           </select>
+        </form>
+        <h1 align=center><fmt:message key="recipes.header"/></h1>
         <form method="GET">
-           <input type="submit" value="Vegan recipes only" onchange="submit()"/>
+           <input type="submit" value="<fmt:message key="recipes.button.vegan"/>" onchange="submit()"/>
            <input type="hidden" name="action" value="displayVeganRecipes"/>
         </form>
         <form method="GET">
-              <input type="submit" value="All known recipes" onchange="submit()"/>
+              <input type="submit" value="<fmt:message key="recipes.button.all"/>" onchange="submit()"/>
               <input type="hidden" name="action" value="displayKnownRecipes" />
         </form>
         <br><br>
@@ -34,19 +47,18 @@
                 <thead>
                     <tr>
                        <th>#</th>
-                       <th>Name</th>
-                       <th>Description</th>
-                       <th>Portion weight</th>
+                       <th><fmt:message key="recipes.table.name"/></th>
+                       <th><fmt:message key="recipes.table.description"/></th>
+                       <th><fmt:message key="recipes.table.weight"/></th>
                        <th>
                             <a href="${sortRecipesByCaloriesAsc}">
                                 <img src="${pageContext.request.contextPath}/img/ascending.png" alt="ASC">
-                            </a>
-                            Portion calories
+                            </a><fmt:message key="recipes.table.calories"/>
                             <a href="${sortRecipesByCaloriesDesc}">
                                 <img src="${pageContext.request.contextPath}/img/descending.png" alt="DESC">
                             </a>
                         </th>
-                       <th>Vegetarian</th>
+                       <th><fmt:message key="recipes.table.vegan"/></th>
                     </tr>
                 </thead>
                 <tbody>
